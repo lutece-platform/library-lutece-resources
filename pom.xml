@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+        <artifactId>lutece-global-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>8.0.0-SNAPSHOT</version>
+		<relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>library-lutece-resources</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  	<packaging>jar</packaging>
+  <name>Lutece Resource Component</name>
+  <description>A component to transparently retrieve resources from the filesystem, classpath or internet.</description>
+  <repositories>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+  <scm>
+    <connection>scm:git:git@github.com:lutece-platform/library-lutece-resources.git</connection>
+    <developerConnection>scm:git:git@github.com:lutece-platform/library-lutece-resources.git</developerConnection>
+    <url>http://github.com/lutece-platform/library-lutece-resources.git</url>
+  </scm>
+  <issueManagement>
+    <system>rdmine</system>
+    <url>https://dev.lutece.paris.fr/bugtracker/projects/library-lutece-resources/issues</url>
+  </issueManagement>
+
+  <dependencies>
+    <!-- Log4j2 -->
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-api</artifactId>
+	</dependency>
+	    <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+	    <!-- TEST -->
+	    <dependency>
+	            <groupId>fr.paris.lutece.plugins</groupId>
+	            <artifactId>library-lutece-unit-testing</artifactId>
+	            <type>jar</type>
+	            <scope>test</scope>
+	    </dependency>  
+    
+  </dependencies>
+</project>
