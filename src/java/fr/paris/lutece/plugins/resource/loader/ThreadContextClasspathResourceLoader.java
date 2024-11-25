@@ -31,11 +31,20 @@ import jakarta.inject.Named;
 import fr.paris.lutece.plugins.resource.LuteceResource;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -74,9 +83,11 @@ public class ThreadContextClasspathResourceLoader extends AbstractResourceLoader
 
         return new URLLuteceResource(url);
     }
+    
+    
     @Override
-	public Set<URL> getResourceURL(String path) throws ResourceNotFoundException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	public Set<URL> getResourceURL(String path) throws ResourceNotFoundException {				
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		if (classLoader == null) {
             throw new ResourceNotFoundException(path);
         }
@@ -87,25 +98,39 @@ public class ThreadContextClasspathResourceLoader extends AbstractResourceLoader
 		if (path != null && !path.endsWith("/")) {
 			path += "/";
         }
-        Enumeration<URL> urls;
-		try {
-			urls = classLoader.getResources(path);
-		} catch (IOException e) {
-            throw new ResourceNotFoundException(path, e);
-		}
-		if( urls == null) {
+        URL url= classLoader.getResource(path);	
+		if( url == null) {
             throw new ResourceNotFoundException(path);
 		}
-        Set<URL> resourcePaths = new HashSet<>();
-        while (urls.hasMoreElements()) {
-            URL url = urls.nextElement();
-            resourcePaths.add(url);
+		
+		Path pathDir = Paths.get(url.getPath( ));
+		
+        Set<URL> listUrl = new HashSet<>();
+		try (Stream<Path> stream = Files.walk(pathDir, 1)) {
+            Set<Path> resources = stream
+                .filter(Files::isRegularFile)
+                .collect(Collectors.toSet());
+
+            if (resources.isEmpty()) {
+                throw new ResourceNotFoundException("No resources found in the path : " + path);
+            }
+
+            for(Path rec: resources) {
+            	listUrl.add(toURL(rec));
+            }            
+            return listUrl;
+
+        } catch (IOException e) {
+            throw new ResourceNotFoundException("Error while reading files in the path : " + path, e);
         }
-        if(resourcePaths.isEmpty()) {
-            throw new ResourceNotFoundException(path);
+   }
+	private  URL toURL(Path path) throws ResourceNotFoundException {
+        try {
+            return path.toUri().toURL();
+        } catch (MalformedURLException e) {
+            throw new ResourceNotFoundException("Error during path conversion to URL : " + path, e);
         }
-        return resourcePaths;
-	}
+    }
     @Override
 	public String getId() {
 		return ID;
@@ -114,5 +139,5 @@ public class ThreadContextClasspathResourceLoader extends AbstractResourceLoader
     public int getOrdinal() {
         return ordinalValue;
     }
-	
+    
 }

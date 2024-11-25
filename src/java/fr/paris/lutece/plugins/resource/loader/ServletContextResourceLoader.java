@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.ServletContext;
 import fr.paris.lutece.plugins.resource.LuteceResource;
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
@@ -65,7 +66,7 @@ public class ServletContextResourceLoader extends AbstractResourceLoader {
     * @param context
     *            the context servlet initialized event
     */
-	public void initializedOtherService(@Observes @Initialized(ApplicationScoped.class)
+	public void initializedOtherService(@Observes @Priority(value=1) @Initialized(ApplicationScoped.class)
 		ServletContext context){
 		servletContext= context;	    
 	}
