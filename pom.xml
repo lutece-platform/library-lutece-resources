@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-lutece-resources</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   	<packaging>jar</packaging>
   <name>Lutece Resource Component</name>
   <description>A component to transparently retrieve resources from the filesystem, classpath or internet.</description>
@@ -26,6 +26,7 @@
     <connection>scm:git:https://github.com/lutece-platform/library-lutece-resources.git</connection>
     <developerConnection>scm:git:https://github.com/lutece-platform/library-lutece-resources.git</developerConnection>
     <url>https://github.com/lutece-platform/library-lutece-resources.git</url>
+    <tag>library-lutece-resources-1.0.0</tag>
   </scm>
   <issueManagement>
     <system>rdmine</system>
