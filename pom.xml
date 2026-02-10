@@ -2,7 +2,7 @@
    <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>8.0.0-SNAPSHOT</version>
+        <version>8.0.0</version>
 		<relativePath />
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -23,9 +23,9 @@
         </repository>
     </repositories>
   <scm>
-    <connection>scm:git:git@github.com:lutece-platform/library-lutece-resources.git</connection>
-    <developerConnection>scm:git:git@github.com:lutece-platform/library-lutece-resources.git</developerConnection>
-    <url>http://github.com/lutece-platform/library-lutece-resources.git</url>
+    <connection>scm:git:https://github.com/lutece-platform/library-lutece-resources.gi</connection>
+    <developerConnection>scm:git:https://github.com/lutece-platform/library-lutece-resources.git</developerConnection>
+    <url>https://github.com/lutece-platform/library-lutece-resources.git</url>
   </scm>
   <issueManagement>
     <system>rdmine</system>
