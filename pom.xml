@@ -23,7 +23,7 @@
         </repository>
     </repositories>
   <scm>
-    <connection>scm:git:https://github.com/lutece-platform/library-lutece-resources.gi</connection>
+    <connection>scm:git:https://github.com/lutece-platform/library-lutece-resources.git</connection>
     <developerConnection>scm:git:https://github.com/lutece-platform/library-lutece-resources.git</developerConnection>
     <url>https://github.com/lutece-platform/library-lutece-resources.git</url>
   </scm>
